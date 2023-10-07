@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+option go_package = "proto/supervisor";
+
+message JobData {
+  string name = 1;
+  string identifier = 2;
+  google.protobuf.Struct params = 3;
+}
+
+message Response {
+  optional Error error = 1;
+}
+
+message Error {
+  int32 code = 1;
+  string message = 2;
+}

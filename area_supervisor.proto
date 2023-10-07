@@ -1,26 +1,27 @@
 syntax = "proto3";
 
-package area_worker;
+package area_supervisor;
 
 option go_package = "proto/supervisor";
 
+import "area_types.proto";
 import "google/protobuf/empty.proto";
-import "google/protobuf/struct.proto";
 
-service AreaWorkerService {
-    rpc LaunchJob(AreaData) returns (google.protobuf.Empty) {}
-    rpc KillJob(AreaData) returns (google.protobuf.Empty) {}
+service AreaSupervisorService {
+    rpc LaunchJob(JobData) returns (Response) {}
+    rpc KillJob(JobId) returns (Response) {}
+    rpc KillAllJobs(google.protobuf.Empty) returns (Response) {}
     rpc ListJobs(google.protobuf.Empty) returns (JobList) {}
 }
 
-message AreaData {
-    string name = 1;
-    google.protobuf.Struct params = 2;
+message JobId {
+    string identifier = 1;
 }
 
 message Job {
     string name = 1;
-    string status = 2;
+    string identifier = 2;
+    string status = 3;
 }
 
 message JobList {
