@@ -8,7 +8,7 @@ import "area_types.proto";
 import "google/protobuf/empty.proto";
 
 service AreaSupervisorService {
-    rpc LaunchJob(JobData) returns (Response) {}
+    rpc LaunchJob(AuthenticatedJobData) returns (Response) {}
     rpc KillJob(JobId) returns (Response) {}
     rpc KillAllJobs(google.protobuf.Empty) returns (Response) {}
     rpc ListJobs(google.protobuf.Empty) returns (JobList) {}

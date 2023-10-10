@@ -10,6 +10,13 @@ message JobData {
   google.protobuf.Struct params = 3;
 }
 
+message AuthenticatedJobData {
+  string name = 1;
+  string identifier = 2;
+  google.protobuf.Struct params = 3;
+  google.protobuf.Struct auth = 4;
+}
+
 message Response {
   optional Error error = 1;
 }
