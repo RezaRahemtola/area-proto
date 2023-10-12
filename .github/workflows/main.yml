@@ -1,0 +1,36 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  rebuild-images:
+    runs-on: ubuntu-latest
+    name: Rebuild images using proto files
+    environment: Production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Rebuild supervisor and worker images
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVICES_SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ${{ secrets.SCP_TARGET }}
+            cd ${{ secrets.SERVICES_PROJECT_PATH }}
+            docker compose build --no-cache
+
+      - name: Rebuild backend image
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.MAIN_SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ${{ secrets.SCP_TARGET }}
+            docker compose build --no-cache server
