@@ -8,4 +8,11 @@ import "google/protobuf/empty.proto";
 service AreaBackService {
     rpc OnAction(JobData) returns (google.protobuf.Empty) {}
     rpc OnReaction(JobData) returns (google.protobuf.Empty) {}
+    rpc OnError(JobError) returns (google.protobuf.Empty) {}
+}
+
+message JobError {
+    string identifier = 1;
+    string error = 2;
+    bool isAuthError = 3;
 }
