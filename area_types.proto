@@ -2,6 +2,8 @@ syntax = "proto3";
 
 import "google/protobuf/struct.proto";
 
+package area_types;
+
 option go_package = "proto/supervisor";
 
 message JobData {

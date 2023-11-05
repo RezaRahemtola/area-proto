@@ -6,8 +6,8 @@ import "area_types.proto";
 import "google/protobuf/empty.proto";
 
 service AreaBackService {
-    rpc OnAction(JobData) returns (google.protobuf.Empty) {}
-    rpc OnReaction(JobData) returns (google.protobuf.Empty) {}
+    rpc OnAction(area_types.JobData) returns (google.protobuf.Empty) {}
+    rpc OnReaction(area_types.JobData) returns (google.protobuf.Empty) {}
     rpc OnError(JobError) returns (google.protobuf.Empty) {}
 }
 
